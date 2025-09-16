@@ -6,14 +6,47 @@ namespace StringManipulationChallenge
     {
         static void Main(string[] args)
         {
-            /*
-            *
-            * implement the required code here and within the methods below.
-            *
-            */
-            //when you call a method, you call it with arguments. The args values are held in a variable.
+            // if (args.Length < 2 || (args.Length == 1 && args[0] != "--help"))
+            // {
+            //     Console.Write("""
+            //         usage: dotnet run <function> <arguments>
+            //         eg:    dotnet run 0 "awawaw"
+
+            //         0: StringToUpper        arg: string
+            //         1: StringToLower        arg: string
+            //         2: StringTrim           arg: string
+            //         3: StringSubstring      arg: string, starting index, ending index
+            //         4: SearchChar           arg: string, char to search for
+            //         5: ConcatNames          arg: first name, last name
+
+            //         """);
+
+            //     return;
+            // }
+
+            // int function = -1;
+
+            // try
+            // {
+            //     function = int.Parse(args[0]);
+            // }
+            // catch
+            // {
+            //     Console.WriteLine("invalid function: " + args[0]);
+            // }
+
+            // Console.WriteLine(
+            //     function switch
+            //     {
+            //         0 => StringToUpper(args[1]),
+            //         1 => StringToLower(args[0]),
 
 
+            //         _ => "invalid function: " + args[0]
+            //     }
+            // );
+
+            Console.WriteLine("it works probably. idk. " + args + ". bottom text.");
         }
 
         /// <summary>
@@ -25,7 +58,6 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string StringToUpper(string myString)// the method itself has 'parameters'
         {
-            // throw new NotImplementedException("StringToUpper method not implemented.");
             return myString.ToUpper();
         }
 
@@ -38,7 +70,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>       
         public static string StringToLower(string usersString)
         {
-            throw new NotImplementedException("StringToUpper method not implemented.");
+            return usersString.ToLower();
         }
 
         /// <summary>
@@ -51,7 +83,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string StringTrim(string usersStringWithWhiteSpace)
         {
-            throw new NotImplementedException("StringTrim method not implemented.");
+            return usersStringWithWhiteSpace.Trim();
         }
 
         /// <summary>
@@ -62,11 +94,11 @@ namespace StringManipulationChallenge
         /// </summary>
         /// <param name="x"></param>
         /// <param name="firstElement"></param>
-        /// <param name="lastElement"></param>
+        /// <param name="lengthOfSubstring"></param>
         /// <returns></returns>
-        public static string StringSubstring(string x, int firstElement, int lengthOfSubsring)
+        public static string StringSubstring(string x, int firstElement, int lengthOfSubstring)
         {
-            throw new NotImplementedException("StringSubstring method not implemented.");
+            return x.Substring(firstElement, lengthOfSubstring);
         }
 
         /// <summary>
@@ -81,7 +113,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static int SearchChar(string userInputString, char charUserWants)
         {
-            throw new NotImplementedException("SearchChar method not implemented.");
+            return userInputString.Trim().IndexOf(charUserWants);
         }
 
         /// <summary>
@@ -96,7 +128,7 @@ namespace StringManipulationChallenge
         /// <returns></returns>
         public static string ConcatNames(string fName, string lName)
         {
-            throw new NotImplementedException("ConcatNames method not implemented.");
+            return fName + " " + lName;
         }
     }//end of program
 }
