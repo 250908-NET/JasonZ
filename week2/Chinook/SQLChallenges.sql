@@ -73,23 +73,25 @@ where Genre.Name = 'Rock';
 
 -- Show all invoices together with the name of the sales agent for each one
 select (Employee.LastName + ', ' + Employee.FirstName) as "Sales Agent", Invoice.*
-from Invoice 
+from Invoice
     left join Customer on Invoice.CustomerId = Customer.CustomerId
-    left join Employee on Employee.EmployeeId = Customer.SupportRepId
+    left join Employee on Customer.SupportRepId = Employee.EmployeeId
 order by "Sales Agent" asc;
 
 -- Which sales agent made the most sales in 2009?
--- with "AllSales" as (
---     select (e.LastName + ', ' + e.FirstName) as "Sales Agent", i.Total
---     from Invoice i
---         left join Customer c on Invoice.CustomerId = Customer.CustomerId
---         left join Employee e on Employee.EmployeeId = Customer.SupportRepId
---     order by "Sales Agent" asc
--- )
--- select "AllSales"."Sales Agent", sum("AllSales".Total)
--- from "AllSales"
--- group by "AllSales"."Sales Agent"
--- order by sum("AllSales".Total);
+with SalesTotal as (
+    select Employee.EmployeeId, sum(Invoice.Total) as Total
+    from Invoice
+        left join Customer on Invoice.CustomerId = Customer.CustomerId
+        left join Employee on Customer.SupportRepId = Employee.EmployeeId
+    where year(Invoice.InvoiceDate) = 2009
+    group by Employee.EmployeeId
+)
+select top 1 with ties (Employee.LastName + ', ' + Employee.FirstName) as "Sales Agent", SalesTotal.Total
+from SalesTotal
+    left join Employee on Employee.EmployeeId = SalesTotal.EmployeeId
+order by SalesTotal.Total desc
+;
 
 -- How many customers are assigned to each sales agent?
 
