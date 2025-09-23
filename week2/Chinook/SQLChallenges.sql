@@ -12,18 +12,19 @@
 
 -- BASIC CHALLENGES
 -- List all customers (full name, customer id, and country) who are not in the USA
-select FirstName, LastName, CustomerId, Country 
-from Customer
-where Country <> 'USA';
+select concat(LastName, ', ', FirstName) as 'Name', CustomerId, Country 
+    from Customer
+    where Country <> 'USA';
+
 -- List all customers from Brazil
 select FirstName, LastName, CustomerId, Country 
-from Customer
-where Country = 'Brazil';
+    from Customer
+    where Country = 'Brazil';
     
 -- List all sales agents
 select * 
-from Employee
-where Title = 'Sales Support Agent';
+    from Employee
+    where Title = 'Sales Support Agent';
 
 -- Retrieve a list of all countries in billing addresses on invoices
 select Country 
@@ -31,12 +32,12 @@ from Customer
 group by Country;
 
 -- Retrieve how many invoices there were in 2009, and what was the sales total for that year?
-select year(InvoiceDate) as 'Year', count(*) as 'Invoices', sum(Total) as 'Sales' 
+select year(InvoiceDate) as "Year", count(*) as "Invoices", sum(Total) as "Sales" 
 from Invoice
 where year(InvoiceDate) = 2009;
 
     -- (challenge: find the invoice count sales total for every year using one query)
-select year(InvoiceDate) as 'Year', count(*) as 'Invoices', sum(Total) as 'Sales' 
+select year(InvoiceDate) as "Year", count(*) as "Invoices", sum(Total) as "Sales" 
 from Invoice
 group by year(InvoiceDate);
 
@@ -59,11 +60,11 @@ order by sum(Total) desc;
 
 -- JOINS CHALLENGES
 -- Every Album by Artist
-select Artist.Name as 'Artist', Album.Title as 'Album' 
+select Artist.Name as "Artist", Album.Title as "Album"
 from Album left join Artist on Album.ArtistId = Artist.ArtistId;
 
 -- All songs of the rock genre
-select Track.Name as 'Track', Genre.Name as 'Genre'
+select Track.Name as "Track", Genre.Name as "Genre"
 from Track left join Genre on Track.GenreId = Genre.GenreId
 where Genre.Name = 'Rock';
 
@@ -71,8 +72,24 @@ where Genre.Name = 'Rock';
 
 
 -- Show all invoices together with the name of the sales agent for each one
+select (Employee.LastName + ', ' + Employee.FirstName) as "Sales Agent", Invoice.*
+from Invoice 
+    left join Customer on Invoice.CustomerId = Customer.CustomerId
+    left join Employee on Employee.EmployeeId = Customer.SupportRepId
+order by "Sales Agent" asc;
 
 -- Which sales agent made the most sales in 2009?
+-- with "AllSales" as (
+--     select (e.LastName + ', ' + e.FirstName) as "Sales Agent", i.Total
+--     from Invoice i
+--         left join Customer c on Invoice.CustomerId = Customer.CustomerId
+--         left join Employee e on Employee.EmployeeId = Customer.SupportRepId
+--     order by "Sales Agent" asc
+-- )
+-- select "AllSales"."Sales Agent", sum("AllSales".Total)
+-- from "AllSales"
+-- group by "AllSales"."Sales Agent"
+-- order by sum("AllSales".Total);
 
 -- How many customers are assigned to each sales agent?
 
