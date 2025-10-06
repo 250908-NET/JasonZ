@@ -15,6 +15,7 @@
   <body>
     <div class="wrapper">
       <h2>About Me (again)</h2>
+
       <p>
         It's me, a person (allegedly). I enjoy long walks along the beach (of a
         lake in Factorio), and watching the sunset (in Minecraft). I have
@@ -25,14 +26,52 @@
       </p>
 
       <h2>Stuff I Like</h2>
+
       <div class="stuff-list">
-          <div>Factorio</div>
-          <div>Minecraft</div>
-          <div>Library of Ruina</div>
-          <div>Reading</div>
-          <div>Sleeping</div>
-          <div>Making lists</div>
+        <div>Factorio</div>
+        <div>Minecraft</div>
+        <div>Library of Ruina</div>
+        <div>Reading</div>
+        <div>Sleeping</div>
+        <div>Making lists</div>
       </div>
+
+      <h2>A list of items</h2>
+
+      <input type="text" id="item-input" placeholder="Add an item" />
+      <button id="add-item">+</button>
+      <div class="stuff-list" id="item-list"></div>
+
+      <script>
+        const items = [];
+        const itemInput = document.getElementById("item-input");
+        const addItemButton = document.getElementById("add-item");
+        const itemList = document.getElementById("item-list");
+
+        function renderItems() {
+          itemList.innerHTML = "";
+          items.forEach((item) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.textContent = item;
+            itemList.appendChild(itemDiv);
+          });
+        }
+
+        addItemButton.addEventListener("click", () => {
+          const item = itemInput.value;
+          items.push(item);
+          itemInput.value = "";
+          renderItems();
+        });
+
+        newItemInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                addItemButton.click(); // simulate click on button
+            }
+        })
+
+        renderItems();
+      </script>
 
       <h2>An Image of My Choice</h2>
       <img

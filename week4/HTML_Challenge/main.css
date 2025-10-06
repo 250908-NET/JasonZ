@@ -26,7 +26,7 @@ header {
 .stuff-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: left;
   gap: 1rem;
 }
 
