@@ -41,6 +41,7 @@
       <input type="text" id="item-input" placeholder="Add an item" />
       <button id="add-item">+</button>
       <button id="remove-item">-</button>
+      <button id="items-alert">!</button>
       <div class="stuff-list" id="item-list"></div>
 
       <script>
@@ -48,6 +49,7 @@
         const itemInput = document.getElementById("item-input");
         const addItemButton = document.getElementById("add-item");
         const removeItemButton = document.getElementById("remove-item");
+        const alertItemButton = document.getElementById("items-alert");
         const itemList = document.getElementById("item-list");
 
         function renderItems() {
@@ -79,6 +81,14 @@
             items.splice(index, 1);
           }
           renderItems();
+        });
+
+        alertItemButton.addEventListener("click", () => {
+          if (items.length === 0) {
+            alert("No items to alert");
+            return;
+          }
+          alert(items.join(", "));
         });
 
         renderItems();
